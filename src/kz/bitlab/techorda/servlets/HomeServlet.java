@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class HomeServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Book> books = DBManager.getBooks();
+        ArrayList<Book> books = DBConnection.getBooks();
         request.setAttribute("knigi", books);
         request.getRequestDispatcher("/books.jsp").forward(request,response);
 

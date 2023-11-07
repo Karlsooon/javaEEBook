@@ -18,7 +18,7 @@ public class DetailsServlet extends HomeServlet{
         }catch (Exception e){
 
         }
-        Book book = DBManager.getBook(id);
+        Book book = DBConnection.getBook(id);
 
         request.setAttribute("kniga", book);
         request.getRequestDispatcher("/details.jsp").forward(request,response);
