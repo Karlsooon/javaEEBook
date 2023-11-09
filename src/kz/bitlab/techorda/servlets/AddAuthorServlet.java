@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kz.bitlab.techorda.db.Author;
 import kz.bitlab.techorda.db.Book;
 import kz.bitlab.techorda.db.DBConnection;
+import kz.bitlab.techorda.db.User;
 
 import java.io.IOException;
 
@@ -16,23 +17,23 @@ import java.io.IOException;
 public class AddAuthorServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("first_name");
-        String surname = request.getParameter("last_name");
-        String instagram = request.getParameter("instagram");
+        User currentUser = (User) request.getSession().getAttribute("currentUser");
+        if (currentUser != null) {
+            String name = request.getParameter("first_name");
+            String surname = request.getParameter("last_name");
+            String instagram = request.getParameter("instagram");
 
-        Author author = new Author();
-        author.setFirstName(name);
-        author.setLastName(surname);
-        author.setInstagram(instagram);
-        DBConnection.addAuthor(author);
-
-
-
-
+            Author author = new Author();
+            author.setFirstName(name);
+            author.setLastName(surname);
+            author.setInstagram(instagram);
+            DBConnection.addAuthor(author);
 
 
-
-        response.sendRedirect("/authors");
+            response.sendRedirect("/authors");
+        }else{
+            response.sendRedirect("/login");
+        }
     }
 }
 

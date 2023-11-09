@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kz.bitlab.techorda.db.DBConnection;
 import kz.bitlab.techorda.db.DBManager;
+import kz.bitlab.techorda.db.User;
 
 import java.io.IOException;
 
@@ -13,8 +14,14 @@ import java.io.IOException;
 public class DeleteBookServlet extends HomeServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        DBConnection.deleteBook(id);
-        response.sendRedirect("/");
+        User user = (User) request.getSession().getAttribute("currentUser");
+
+        if(user!=null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            DBConnection.deleteBook(id);
+            response.sendRedirect("/");
+        }else{
+            response.sendRedirect("/login");
+        }
     }
 }

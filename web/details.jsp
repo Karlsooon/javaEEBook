@@ -76,6 +76,9 @@
 
               </div>
             </div>
+            <%
+              if(currentUser!=null){
+            %>
             <div class="row mt-3">
               <div class="col-12">
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editBook">
@@ -113,6 +116,7 @@
 
               </div>
             </div>
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="editBook" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -228,9 +232,13 @@
                     </div>
                   </div>
                 </div>
+            <%
+              }
+            %>
 
               </div>
             </div>
+
 
 
             <%

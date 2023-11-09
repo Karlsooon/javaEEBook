@@ -17,6 +17,9 @@
           <div class="col-12">
             <div class="row mt-3">
               <div class="col-12">
+                <%
+                  if(currentUser!=null){
+                %>
                 <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addAuthor">
                   + Add Author
 
@@ -65,14 +68,6 @@
                               <input type="text" class="form-control" name="instagram">
                             </div>
                           </div>
-
-
-
-
-
-
-
-
                           <div class="row mt-3">
                             <div class="col-12">
                               <button class="btn btn-success">ADD AUTHOR</button>
@@ -89,6 +84,9 @@
                     </div>
                   </div>
                 </div>
+                <%
+                  }
+                %>
 
               </div>
 
