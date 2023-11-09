@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kz.bitlab.techorda.db.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/details")
 public class DetailsServlet extends HomeServlet{
@@ -21,6 +22,9 @@ public class DetailsServlet extends HomeServlet{
         Book book = DBConnection.getBook(id);
 
         request.setAttribute("kniga", book);
+
+        ArrayList<Author> authors = DBConnection.getAuthors();
+        request.setAttribute("avtory", authors);
         request.getRequestDispatcher("/details.jsp").forward(request,response);
 
     }

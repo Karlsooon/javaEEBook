@@ -5,21 +5,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kz.bitlab.techorda.db.*;
+import kz.bitlab.techorda.db.Author;
+import kz.bitlab.techorda.db.Book;
+import kz.bitlab.techorda.db.DBConnection;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet("/home.html")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/authors")
+public class AuthorServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Book> books = DBConnection.getBooks();
-        request.setAttribute("knigi", books);
+
         ArrayList<Author> authors = DBConnection.getAuthors();
         request.setAttribute("avtory", authors);
-        request.getRequestDispatcher("/books.jsp").forward(request,response);
+        request.getRequestDispatcher("/author.jsp").forward(request,response);
 
 
     }
