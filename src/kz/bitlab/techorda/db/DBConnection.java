@@ -235,4 +235,45 @@ public class DBConnection {
         }
         return user;
     }
+    public static void addNews(News news){
+        try{
+            PreparedStatement statement = connection.prepareStatement(""+"insert into news (title,content,post_date,user_id) values (?,?,NOW(),?)");
+            statement.setString(1,news.getTitle() );
+            statement.setString(2,news.getContent() );
+            statement.setLong(3,news.getUser().getId() );
+
+            statement.executeUpdate();
+            statement.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<News> getNews(){
+        ArrayList<News> news = new ArrayList<>();
+        try{
+            PreparedStatement statement=connection.prepareStatement(""+"select n.id n.title, n.content, n.user_id, u.full_name, n.post_date from news n inner join users u on u.id=n.user_id order by n.post_date desc ");
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                News n = new News();
+                n.setId(resultSet.getLong("id"));
+                n.setTitle(resultSet.getString("title"));
+                n.setContent(resultSet.getString("content"));
+                n.setPostDate(resultSet.getTimestamp("post_date"));
+
+                User user = new User();
+                user.setId(resultSet.getLong("user_id"));
+                user.setFullName(resultSet.getString("full_name"));
+                n.setUser(user);
+
+                news.add(n);
+            }
+            statement.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return news;
+    }
 }
